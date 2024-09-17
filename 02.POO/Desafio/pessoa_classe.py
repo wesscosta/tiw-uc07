@@ -1,50 +1,26 @@
-from abc import ABC, abstractmethod
+# Classe Pessoa (superclasse)
+class Pessoa:
+    def __init__(self, nome, cpf):
+        self.nome = nome
+        self.cpf = cpf
 
-class Pessoa(ABC):
-    def __init__(self, nome, idade, altura, peso):
-        self.__nome = nome
-        self.idade = idade
-        self.altura = altura
-        self.peso = peso
-        
-    @abstractmethod
-    def calcular_imc(self):
-        pass
-        
-    @abstractmethod
-    def fazer_aniversario(self):
-        pass
-        
-    @abstractmethod
-    def apresentar(self):
-        pass
-        
-class Homem(Pessoa):
-    def __init__(self, nome, idade, altura, peso):
-        super().__init__(nome, idade, altura, peso)
-        
-    def calcular_imc(self):
-        imc = self.peso / (self.altura ** 2)
-        return imc
-        
-    def fazer_aniversario(self):
-        self.idade += 1
-        print(f"Parabéns! {self.nome} agora tem {self.idade} anos.")
-        
-    def apresentar(self):
-        return(f"Olá! Meu nome é {self.nome}, tenho {self.idade} anos, {self.altura}m de altura e peso {self.peso}kg.")
-        
-class Mulher(Pessoa):
-    def __init__(self, nome, idade, altura, peso):
-        super().__init__(nome, idade, altura, peso)
-        
-    def calcular_imc(self):
-        imc = self.peso / (self.altura ** 2)
-        return imc
-        
-    def fazer_aniversario(self):
-        self.idade += 1
-        print(f"Parabéns! {self.nome} agora tem {self.idade} anos.")
-        
-    def apresentar(self):
-        print(f"Olá! Meu nome é {self.nome}, tenho {self.idade} anos, {self.altura}m de altura e peso {self.peso}kg.")
+    def __str__(self):
+        return f'Nome: {self.nome}, CPF: {self.cpf}'
+
+# Classe Aluno (subclasse de Pessoa)
+class Aluno(Pessoa):
+    def __init__(self, nome, cpf, matricula):
+        super().__init__(nome, cpf)
+        self.matricula = matricula
+
+    def __str__(self):
+        return f'{super().__str__()}, Matrícula: {self.matricula}'
+
+# Classe Professor (subclasse de Pessoa)
+class Professor(Pessoa):
+    def __init__(self, nome, cpf, disciplina):
+        super().__init__(nome, cpf)
+        self.disciplina = disciplina
+
+    def __str__(self):
+        return f'{super().__str__()}, Disciplina: {self.disciplina}'
